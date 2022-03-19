@@ -80,8 +80,46 @@ class DoublyLinkedList:
       temp = self.tail
       for _ in range(self.length - 1, index, -1):     # Start from last index to index, decrement by 1
         temp = temp.prev
-    return temp.value
+    return temp
 
+  def set_value(self, index, value):
+    temp = self.get(index)
+    if temp:
+      temp.value = value
+      return True
+    return False
+
+  def insert(self, index, value):
+    if index < 0 or index > self.length:
+      return False
+    if index == 0:
+      return self.prepend(value)
+    if index == self.length:
+      return self.append(value)
+    new_node = Node(value)
+    before = self.get_value(index-1)
+    after = before.next
+    before.next = new_node
+    after.prev = new_node
+    new_node.prev = before
+    new_node.next = after
+    self.length += 1
+    return True
+
+  def remove(self, index):
+    if index == 0:
+      return self.pop_first()
+    if index == self.length:
+      return self.pop()
+    temp = self.get_value(index)
+    before = temp.prev
+    after = temp.next
+    temp.prev = None
+    temp.next = None
+    before.next = after
+    after.prev = before
+    self.length -= 1
+    return True
 
 my_doubly_linked_list = DoublyLinkedList(0)
 my_doubly_linked_list.append(1)
@@ -90,7 +128,7 @@ my_doubly_linked_list.append(3)
 
 my_doubly_linked_list.print_list()
 
-print(f"\n{my_doubly_linked_list.get_value(2)}\n")
+print(f"\n{my_doubly_linked_list.remove(2)}\n")
 
 my_doubly_linked_list.print_list()
 
@@ -98,3 +136,5 @@ my_doubly_linked_list.print_list()
 # my_doubly_linked_list.pop()
 # print(f"\n{my_doubly_linked_list.prepend(2)}\n")
 # print(f"\n{my_doubly_linked_list.pop_first()}\n")
+# print(f"\n{my_doubly_linked_list.get_value(2)}\n")
+# print(f"\n{my_doubly_linked_list.insert(2, 5)}\n")
