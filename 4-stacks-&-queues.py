@@ -85,4 +85,5 @@ class Queue:
 my_queue = Queue(1)
 my_queue.enqueue(2)
 my_queue.enqueue(3)
+my_queue.deqeue()
 my_queue.print_queue()
