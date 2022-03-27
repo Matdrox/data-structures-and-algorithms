@@ -1,0 +1,1 @@
+# Hash functions are one way and deterministic
